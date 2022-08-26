@@ -1,0 +1,48 @@
++normal door
++powered door linked to power switch
++fireplace
++power switch
+
+
+Need
+-Paper
+ -inherits Item
+ -add crumple - allows type confusion with puzzle gear for a bug, have to think of how
+ -add writing - might require a special addition for "write xxxx on paper", bug in amount of data written. stack or heap corruption
+ -add reading
+
+-Journal
+ -Can add pages to it
+ -Can read/write pages by number
+ -Can create new pages - doesn't blank out it's buffer
+ -Can remove/take pages
+
++Key
+ +Specific to a door or a skeleton key
+
++Puzzle Gear
+ +Used for a door puzzle, can be rotated
+
+-Various door mechanisms
+ +Door puzzle with 3 pieces to be rotated
+   +Pieces can be removed and may be required to get proper alignment, how to properly specify locations to go into? - bug if wrong object is inserted
+ +Door requiring unlock via key
+   +Need to indicate type of key to use
+ -Secret passage - fireplace? Picture? Fake wall? Can pull/push to reveal - object referencing hiding object
+ -Door with numeric pad on it, pad is an item that can be taken allowing it to be destroyed. Can also have a new combo programmed in allowing control
+  of a value, type confusion due to improper initialization on another class?
+
++Need "Inspect xxx" to inspect an object in detail instead of what is reported with "look" for puzzles
+
+-phone
++sharpie to write on things? - if you write on a non-item then could control a vtable pointer by having the user buffer after it
+-basic crafting - lockpick that doesn't check the door
+
++doors need to be open/closable once unlocked
+-Item to rotate a room itself or rotate a large area causing multiple rooms to swap
++"stargate"/teleporter/"relocator" with input of where to go - value directly relates to memory location
++chair, desk, etc
+-security system via hidden panel - used to provide info about a few memory locations via serial/timestamp/etc data on the screen. info provided to use teleporter (modified value of the pointer)
+
++replicator, select from a menu of things to make
+    -simple objects, desk, chair, marker, key

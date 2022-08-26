@@ -1,0 +1,17 @@
+#pragma once
+
+typedef int NIVISOR_STATUS;
+
+#define NIVISOR_SUCCESS     0
+#define NIVISOR_INVALID_ARG 1
+#define NIVISOR_BAD_PATH    2
+#define NIVISOR_IO_ERROR    3
+#define NIVISOR_NOT_IMPL    4
+#define NIVISOR_NO_ELEM     5
+#define NIVISOR_BAD_CHILD   6
+#define NIVISOR_IMPOSSIBLE  7
+#define NIVISOR_THREAD_EXIT 8
+#define NIVISOR_FAILED_LOAD 9
+#define NIVISOR_FAULT       10
+#define NIVISOR_NO_SPACE    11
+#define NIVISOR_MEMORY_ERR  12

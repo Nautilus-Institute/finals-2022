@@ -1,0 +1,19 @@
+void exec_mov(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_add(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_sub(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_mul(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_div(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_mod(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_jmp(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_jmz(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_jmn(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_djn(VM* vm, PROCESS* proc, INSTR* instr);
+uint32_t exec_spl(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_cmp(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_seq(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_sne(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_slt(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_ldp(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_stp(VM* vm, PROCESS* proc, INSTR* instr);
+void exec_nop(VM* vm, PROCESS* proc, INSTR* instr);
+

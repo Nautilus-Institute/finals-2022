@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>NI-Link WR 31337 Admin Portal</title>
+        <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
+        <script language="javascript" src="/main.js"></script>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="header">NI-Link WR 31337</div>
+        <div class="status_bar">admin&nbsp;<a href="/logout">Log out</a></div>
+        <div id="status" class="feature_box">
+            <h2>Router Status</h2>
+            Overview:
+            <span id="overview"></span><br />
+            LAN IP:
+            <span id="lan_ip"></span><br />
+            CPU usage:
+            <span id="cpu_usage"></span><br />
+            Bandwidth:
+            <span id="bandwidth"></span><br />
+        </div>
+        <div id="ping" class="feature_box">
+            <h2>Diagnosis</h2>
+            <form action="/ping" method="post">
+                Host: <input type="text" id="host" name="host" pattern="^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" title="Invalid IP format.">
+                <input type="button" id="submit" name="submit" value="Ping!" onclick="ping();">
+            </form>
+            <div id="ping_result_container">
+                <p>Result:</p>
+                <textarea id="ping_result" style="width: 700px; height: 200px;">
+                </textarea>
+            </div>
+        </div>
+        <div id="set_dns_server" class="feature_box">
+            <h2>DNS Configuration</h2>
+            <form action="/set_dns_server" method="post">
+                DNS IP: <input type="text" id="dns_server" name="dns_server" pattern="^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" title="Invalid IP format.">
+                <input type="submit" id="submit" name="submit" value="Submit">
+            </form>
+        </div>
+        <!-- Engineering prototype. No other interfaces are implemented. -->
+    </body>
+</html>

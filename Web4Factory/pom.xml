@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>institute.nautilus</groupId>
+    <artifactId>web4factory</artifactId>
+    <version>2.2.0</version>
+    <name>web4factory</name>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.3</version>
+    </parent>
+
+    <properties>
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <proguard.version>7.0.0</proguard.version>
+        <proguard.maven.plugin.version>2.3.1</proguard.maven.plugin.version>
+        <lombok.version>1.18.20</lombok.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.9.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.integration</groupId>
+          <artifactId>spring-integration-ip</artifactId>
+          <version>5.5.14</version>
+        </dependency>
+        <dependency>
+            <groupId>com.goterl.lazycode</groupId>
+            <artifactId>lazysodium-java</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>co.libly</groupId>
+            <artifactId>resource-loader</artifactId>
+            <version>1.3.10</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>${proguard.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>${proguard.version}</proguardVersion>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}.jar</outjar>
+                    <obfuscate>true</obfuscate>
+                    <options>
+                        <option>-dontshrink</option>
+                        <option>-dontoptimize</option>
+                        <!-- This option will replace all strings in reflections method invocations with new class names.
+                             For example, invokes Class.forName('className')-->
+                        <option>-adaptclassstrings</option>
+                        <!-- This option will save all original annotations and etc. Otherwise all we be removed from files.-->
+                        <option>-keepattributes
+                            Exceptions,
+                            InnerClasses,
+                            Signature,
+                            Deprecated,
+                            SourceFile,
+                            LineNumberTable,
+                            *Annotation*,
+                            EnclosingMethod
+                        </option>
+                        <!-- This option will save all original names in interfaces (without obfuscate).-->
+                        <option>-keepnames interface **</option>
+                        <!-- This option will save all original methods parameters in files defined in -keep sections,
+                             otherwise all parameter names will be obfuscate.-->
+                        <option>-keepparameternames</option>
+                        <!-- This option will save all original class files (without obfuscate) but obfuscate all
+                             in domain and service packages.-->
+                        <option>-keep
+                            class institute.nautilus.web4factory.Web4FactoryApplication {
+                                public static void main(java.lang.String[]);
+                            }
+                        </option>
+                        <option>-keep
+                            class institute.nautilus.web4factory.Web4SecurityManager {
+                                public void checkPermission(java.security.Permission);
+                                public void checkExit(int);
+                            }
+                        </option>
+                        <option>-keep
+                            class institute.nautilus.web4factory.web4factoryfactory.* {
+                                &lt;fields&gt;;
+                            }
+                        </option>
+                        <option>-keep
+                            class institute.nautilus.web4factory.web4factoryfactory.Web4FactoryFactoryAwkWidget {
+                                *;
+                            }
+                        </option>
+                        <option>-keep
+                            class institute.nautilus.web4factory.Web4FactoryExpression {
+                                &lt;fields&gt;;
+                            }
+                        </option>
+                        <option>-keep
+                        class org.springframework.integration.ip.tcp.connection.Web4TcpNetServerConnectionFactory { *; }
+                        </option>
+                        <option>-keep
+                        class com.goterl.* { *; }
+                        </option>
+                        <option>-keep
+                        class institute.nautilus.web4factory.LibFactory { *; }
+                        </option>
+                        <!-- This option ignore warnings such as duplicate class definitions and classes in incorrectly
+                            named files-->
+                        <option>-ignorewarnings</option>
+                        <!-- This option will save all original class files (without obfuscate) in service package-->
+                        <!-- <option>-keep class com.slm.proguard.example.spring.boot.service { *; }</option>-->
+                        <!-- This option will save all original interfaces files (without obfuscate) in all packages.-->
+                        <option>-keep interface * extends * { *; }</option>
+                        <!-- This option will save all original defined annotations in all classes in all packages.-->
+                        <!--<option>-keep class com.slm.proguard.example.spring.boot.config.BeanConfig</option>-->
+                        <!--<option>-keep class com.fasterxml.jackson.** { *; }</option>-->
+                        <option>-keep class org.json.JSONObject.** {** put(java.lang.String,java.util.Map);}</option>
+                        <option>-keepclassmembers class * {
+                                @org.springframework.context.annotation.Bean *;
+                                @org.springframework.beans.factory.annotation.Autowired *;
+                                @org.springframework.beans.factory.annotation.Value *;
+                            }
+                        </option>
+                        <option>-dontwarn com.fasterxml.jackson.databind.**</option>
+                        <option>-dontwarn com.fasterxml.jackson.**</option>
+                    </options>
+                    <injarNotExistsSkip>true</injarNotExistsSkip>
+                    <libs>
+                        <!--Put here your libraries if required-->
+                        <!--<lib>${java.home}/lib/rt.jar</lib>-->
+                    </libs>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.guardsquare</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>${proguard.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven assembly must be run after proguard obfuscation so it take already obfuscated files.-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>institute.nautilus.web4factory.Web4FactoryApplication</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+    </repositories>
+</project>

@@ -1,0 +1,11 @@
+This library is for having a known random generator for binaries to use that allow for a deterministic randomizer based on the flag data itself without leaking the flag.
+
+The expectation is that services will use this at some point to return values or seed random information that allows a poller to detect if someone is forwarding traffic to another team or disallowing flag access.
+
+It does not currently access the flag more than once so in theory someone could still sandbox flag access, this should be altered before finals to complicate sandbox attacks. Initial thought is a 1 in x chance of accessing the flag file and reading it during random value requests.
+
+Usage:
+
+Link against the library or use the python script. If the c library is used then it will auto attempt to open and seed itself with the flag file itself. If the flag file is not "flag" then the NautilusInitRandFile or NautilusInitRandData need to be called, see header for paramaters.
+
+Ask Lightning if help is needed
